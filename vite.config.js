@@ -1,7 +1,15 @@
-import react from '@vitejs/plugin-react'
-import { defineConfig } from 'vite'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import { resolve } from "path";
+import { fileURLToPath } from "url";
 
-// https://vite.dev/config/
+const __dirname = fileURLToPath(new URL(".", import.meta.url));
+
 export default defineConfig({
   plugins: [react()],
-})
+  resolve: {
+    alias: {
+      "hrnet-datatable": resolve(__dirname, "../hrnet-datatable/src/index.js"),
+    },
+  },
+});
