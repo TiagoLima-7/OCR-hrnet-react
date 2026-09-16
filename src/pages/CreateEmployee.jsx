@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import Select from "react-select";
 import "react-datepicker/dist/react-datepicker.css";
@@ -82,134 +82,144 @@ export default function CreateEmployee() {
   }
 
   return (
-    <main>
+    <div>
       <div className="title">
         <h1>HRnet</h1>
       </div>
       <div className="container">
-        <Link to="/employees">View Current Employees</Link>
         <h2>Create Employee</h2>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="firstName">First Name</label>
-          <input
-            id="firstName"
-            name="firstName"
-            type="text"
-            value={form.firstName}
-            onChange={setText}
-            required
-          />
+          <div className="form-top">
+            <fieldset className="employee_personal_data">
+              <legend>Personal Data</legend>
+              <label htmlFor="firstName">First Name</label>
+              <input
+                id="firstName"
+                name="firstName"
+                type="text"
+                value={form.firstName}
+                onChange={setText}
+                required
+              />
 
-          <label htmlFor="lastName">Last Name</label>
-          <input
-            id="lastName"
-            name="lastName"
-            type="text"
-            value={form.lastName}
-            onChange={setText}
-            required
-          />
+              <label htmlFor="lastName">Last Name</label>
+              <input
+                id="lastName"
+                name="lastName"
+                type="text"
+                value={form.lastName}
+                onChange={setText}
+                required
+              />
 
-          <label>Date of Birth</label>
-          <DatePicker
-            selected={form.dateOfBirth}
-            onChange={(d) => setDate("dateOfBirth", d)}
-            dateFormat={"MM/dd/yyyy"}
-            placeholderText=""
-            showYearDropdown
-            scrollableYearDropdown
-            yearDropdownItemNumber={60}
-            startDate={
-              new Date(
-                new Date().getFullYear() - 18,
-                new Date().getMonth(),
-                new Date().getDate(),
-              )
-            }
-          />
-          {errors.dateOfBirth && (
-            <p style={{ color: "red", fontSize: "12px" }}>
-              {errors.dateOfBirth}
-            </p>
-          )}
+              <label>Date of Birth</label>
+              <DatePicker
+                selected={form.dateOfBirth}
+                onChange={(d) => setDate("dateOfBirth", d)}
+                dateFormat={"MM/dd/yyyy"}
+                placeholderText=""
+                showYearDropdown
+                scrollableYearDropdown
+                yearDropdownItemNumber={60}
+                startDate={
+                  new Date(
+                    new Date().getFullYear() - 18,
+                    new Date().getMonth(),
+                    new Date().getDate(),
+                  )
+                }
+              />
+              {errors.dateOfBirth && (
+                <p style={{ color: "red", fontSize: "12px" }}>
+                  {errors.dateOfBirth}
+                </p>
+              )}
 
-          <label>Start Date</label>
-          <DatePicker
-            selected={form.startDate}
-            onChange={(d) => setDate("startDate", d)}
-            dateFormat={"MM/dd/yyyy"}
-            placeholderText=""
-            showYearDropdown
-            scrollableYearDropdown
-            yearDropdownItemNumber={60}
-            minDate={form.dateOfBirth ?? undefined}
-          />
-          {errors.startDate && (
-            <p style={{ color: "red", fontSize: "12px" }}>{errors.startDate}</p>
-          )}
+              <label>Start Date</label>
+              <DatePicker
+                selected={form.startDate}
+                onChange={(d) => setDate("startDate", d)}
+                dateFormat={"MM/dd/yyyy"}
+                placeholderText=""
+                showYearDropdown
+                scrollableYearDropdown
+                yearDropdownItemNumber={60}
+                minDate={form.dateOfBirth ?? undefined}
+              />
+              {errors.startDate && (
+                <p style={{ color: "red", fontSize: "12px" }}>
+                  {errors.startDate}
+                </p>
+              )}
+            </fieldset>
+            <fieldset className="address">
+              <legend>Address</legend>
 
-          <fieldset className="address">
-            <legend>Address</legend>
+              <label htmlFor="street">Street</label>
+              <input
+                id="street"
+                name="street"
+                type="text"
+                value={form.street}
+                onChange={setText}
+                required
+              />
 
-            <label htmlFor="street">Street</label>
-            <input
-              id="street"
-              name="street"
-              type="text"
-              value={form.street}
-              onChange={setText}
-              required
-            />
+              <label htmlFor="city">City</label>
+              <input
+                id="city"
+                name="city"
+                type="text"
+                value={form.city}
+                onChange={setText}
+                required
+              />
 
-            <label htmlFor="city">City</label>
-            <input
-              id="city"
-              name="city"
-              type="text"
-              value={form.city}
-              onChange={setText}
-              required
-            />
+              <label>State</label>
+              <Select
+                menuPortalTarget={document.body}
+                classNamePrefix="rs"
+                styles={{
+                  control: (base) => ({
+                    ...base,
+                    backgroundColor: "#f6f6f6",
+                  }),
+                  menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+                }}
+                options={STATES}
+                value={form.state}
+                onChange={(o) => setSelect("state", o)}
+                placeholder="Select state..."
+              />
 
-            <label>State</label>
+              <label htmlFor="zipCode">Zip Code</label>
+              <input
+                id="zipCode"
+                name="zipCode"
+                type="text"
+                value={form.zipCode}
+                onChange={setText}
+                required
+              />
+            </fieldset>
+          </div>
+
+          <div className="form-bottom">
+            <label>Department</label>
             <Select
+              classNamePrefix="rs"
               styles={{
                 control: (base) => ({
                   ...base,
                   backgroundColor: "#f6f6f6",
                 }),
               }}
-              options={STATES}
-              value={form.state}
-              onChange={(o) => setSelect("state", o)}
-              placeholder="Select state..."
+              options={DEPARTMENTS}
+              value={form.department}
+              onChange={(o) => setSelect("department", o)}
+              placeholder="Select department"
             />
-
-            <label htmlFor="zipCode">Zip Code</label>
-            <input
-              id="zipCode"
-              name="zipCode"
-              type="text"
-              value={form.zipCode}
-              onChange={setText}
-              required
-            />
-          </fieldset>
-
-          <label>Department</label>
-          <Select
-            styles={{
-              control: (base) => ({
-                ...base,
-                backgroundColor: "#f6f6f6",
-              }),
-            }}
-            options={DEPARTMENTS}
-            value={form.department}
-            onChange={(o) => setSelect("department", o)}
-            placeholder="Select department"
-          />
-
+          </div>
           <button className="btn" type="submit">
             Save
           </button>
@@ -223,6 +233,6 @@ export default function CreateEmployee() {
           onClose={handleClose}
         />
       )}
-    </main>
+    </div>
   );
 }
