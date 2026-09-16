@@ -9,7 +9,7 @@ export default function Header() {
             <div className="logo">
               <p>Wealth</p>
               <img
-                src="/logoWealthHealth-no_bg.png"
+                src="/logoWealthHealth-no_bg_1.png"
                 alt="WealthHealth"
                 className="header-logo"
               />

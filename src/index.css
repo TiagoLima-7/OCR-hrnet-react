@@ -66,6 +66,7 @@ textarea {
   font-size: 72px;
   text-transform: uppercase;
   color: #5b700f;
+  gap: 50px;
 }
 
 .header-nav {
@@ -90,10 +91,18 @@ textarea {
   filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
 }
 
+.site-main {
+  min-height: calc(100vh - 276px);
+}
+
 .title {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.title h1 {
+  font-size: 48px;
 }
 
 .container {
@@ -208,10 +217,109 @@ fieldset {
 }
 
 .site-footer {
-  position: fixed;
+  position: relative;
   bottom: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
+  margin-top: 60px;
+}
+
+/* === Modal === */
+
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  width: 50%;
+  height: 50%;
+  background: #f3dfcb;
+  color: #5b700f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.modal-icon svg {
+  width: 50px;
+  height: 50px;
+}
+
+/* === DataTable === */
+
+.global-container {
+  width: 100%;
+  padding: 0 24px 24px;
+  overflow-x: auto;
+}
+
+.search-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+
+.search-container input {
+  border: none;
+  border-bottom: 2px solid #5b700f;
+  background: transparent;
+  padding: 6px 4px;
+  width: 220px;
+  font-size: 16px;
+  color: #333;
+  outline: none;
+}
+
+.search-container input::placeholder {
+  color: #aaa;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+thead {
+  color: #5b700f;
+  font-size: 1rem;
+  border-bottom: 2px solid #5b700f;
+}
+
+thead th {
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+tbody tr {
+  border-bottom: 1px solid rgba(91, 112, 15, 0.2);
+  transition: background 0.1s ease-in-out;
+}
+
+tbody tr:last-child {
+  border-bottom: none;
+}
+
+tbody tr:hover {
+  background-color: rgba(91, 112, 15, 0.07);
+}
+
+tbody td {
+  padding: 10px 12px;
+  color: #333;
+  white-space: nowrap;
 }

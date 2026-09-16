@@ -20,9 +20,11 @@ export default function EmployeeList() {
 
   return (
     <div className="container">
-      <h1>Current employees</h1>
+      <h2>Current employees</h2>
       <DataTable data={employees} columns={columns} />
-      <Link to="/create">Home</Link>
+      <Link className="btn" to="/create">
+        Home
+      </Link>
     </div>
   );
 }

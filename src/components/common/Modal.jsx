@@ -40,7 +40,7 @@ export default function Modal({ title, message, onClose }) {
           {title}
         </h2>
         <p className="modal-message">{message}</p>
-        <button className="modal-btn" onClick={onClose} autoFocus>
+        <button className="modal-btn btn" onClick={onClose} autoFocus>
           View Employee List
         </button>
       </div>
