@@ -74,7 +74,7 @@ textarea {
   justify-content: center;
   align-items: center;
   gap: 50px;
-  padding: 16px;
+  padding-top: 32px;
 }
 
 .nav-link {
@@ -93,12 +93,14 @@ textarea {
 
 .site-main {
   min-height: calc(100vh - 276px);
+  padding-top: 12px;
 }
 
 .title {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-bottom: 12px;
 }
 
 .title h1 {
@@ -137,7 +139,6 @@ textarea {
   justify-content: space-between;
   gap: 200px;
   margin-top: 20px;
-  padding: 0 22px;
 }
 
 .container .form-bottom > * {
@@ -223,7 +224,7 @@ fieldset {
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin-top: 60px;
+  margin-top: 50px;
 }
 
 /* === Modal === */
@@ -259,67 +260,6 @@ fieldset {
 
 /* === DataTable === */
 
-.global-container {
-  width: 100%;
-  padding: 0 24px 24px;
-  overflow-x: auto;
-}
-
-.search-container {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 16px;
-}
-
-.search-container input {
-  border: none;
-  border-bottom: 2px solid #5b700f;
-  background: transparent;
-  padding: 6px 4px;
-  width: 220px;
-  font-size: 16px;
-  color: #333;
-  outline: none;
-}
-
-.search-container input::placeholder {
-  color: #aaa;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.9rem;
-}
-
-thead {
-  color: #5b700f;
-  font-size: 1rem;
-  border-bottom: 2px solid #5b700f;
-}
-
-thead th {
-  padding: 10px 12px;
-  text-align: left;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-tbody tr {
-  border-bottom: 1px solid rgba(91, 112, 15, 0.2);
-  transition: background 0.1s ease-in-out;
-}
-
-tbody tr:last-child {
-  border-bottom: none;
-}
-
-tbody tr:hover {
-  background-color: rgba(91, 112, 15, 0.07);
-}
-
-tbody td {
-  padding: 10px 12px;
-  color: #333;
-  white-space: nowrap;
+.datatable-container {
+  margin-top: 16px;
 }

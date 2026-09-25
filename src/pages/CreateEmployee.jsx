@@ -205,20 +205,22 @@ export default function CreateEmployee() {
           </div>
 
           <div className="form-bottom">
-            <label>Department</label>
-            <Select
-              classNamePrefix="rs"
-              styles={{
-                control: (base) => ({
-                  ...base,
-                  backgroundColor: "#f6f6f6",
-                }),
-              }}
-              options={DEPARTMENTS}
-              value={form.department}
-              onChange={(o) => setSelect("department", o)}
-              placeholder="Select department"
-            />
+            <fieldset>
+              <legend>Department</legend>
+              <Select
+                classNamePrefix="rs"
+                styles={{
+                  control: (base) => ({
+                    ...base,
+                    backgroundColor: "#f6f6f6",
+                  }),
+                }}
+                options={DEPARTMENTS}
+                value={form.department}
+                onChange={(o) => setSelect("department", o)}
+                placeholder="Select department"
+              />
+            </fieldset>
           </div>
           <button className="btn" type="submit">
             Save

@@ -19,7 +19,7 @@ export default function EmployeeList() {
   const employees = useSelector(selectEmployees);
 
   return (
-    <div className="container">
+    <div className="container datatable-container">
       <h2>Current employees</h2>
       <DataTable data={employees} columns={columns} />
       <Link className="btn" to="/create">
