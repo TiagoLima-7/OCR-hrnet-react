@@ -11,5 +11,6 @@ export default defineConfig({
     alias: {
       "hrnet-datatable": resolve(__dirname, "../hrnet-datatable/src/index.js"),
     },
+    dedupe: ["react", "react-dom"],
   },
 });
