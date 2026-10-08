@@ -36,7 +36,6 @@ export default function CreateEmployee() {
 
   function handleSubmit(e) {
     e.preventDefault();
-
     const newErrors = {};
     if (!form.dateOfBirth) {
       newErrors.dateOfBirth = "Date of birth is required";
@@ -51,13 +50,11 @@ export default function CreateEmployee() {
         newErrors.dateOfBirth = "Employee must be at least 18 years old";
       }
       if (!form.startDate) newErrors.startDate = "Start date is required";
-      console.log(minAge);
     }
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
-
     setErrors({});
     dispatch(
       addEmployee({
@@ -92,8 +89,10 @@ export default function CreateEmployee() {
           <div className="form-top">
             <fieldset className="employee_personal_data">
               <legend>Personal Data</legend>
+
               <label htmlFor="firstName">First Name</label>
               <input
+                data-testid="input-first-name"
                 id="firstName"
                 name="firstName"
                 type="text"
@@ -104,6 +103,7 @@ export default function CreateEmployee() {
 
               <label htmlFor="lastName">Last Name</label>
               <input
+                data-testid="input-last-name"
                 id="lastName"
                 name="lastName"
                 type="text"
@@ -112,8 +112,17 @@ export default function CreateEmployee() {
                 required
               />
 
-              <label>Date of Birth</label>
+              <label htmlFor="dateOfBirth">Date of Birth</label>
               <DatePicker
+                customInput={
+                  <input
+                    data-testid="input-date-of-birth"
+                    id="dateOfBirth"
+                    aria-label="Date of Birth"
+                  />
+                }
+                popperProps={{ strategy: "fixed" }}
+                portalId="datepicker-portal"
                 selected={form.dateOfBirth}
                 onChange={(d) => setDate("dateOfBirth", d)}
                 dateFormat={"MM/dd/yyyy"}
@@ -135,8 +144,17 @@ export default function CreateEmployee() {
                 </p>
               )}
 
-              <label>Start Date</label>
+              <label htmlFor="startDate">Start Date</label>
               <DatePicker
+                customInput={
+                  <input
+                    data-testid="input-start-date"
+                    id="startDate"
+                    aria-label="Start Date"
+                  />
+                }
+                popperProps={{ strategy: "fixed" }}
+                portalId="datepicker-portal"
                 selected={form.startDate}
                 onChange={(d) => setDate("startDate", d)}
                 dateFormat={"MM/dd/yyyy"}
@@ -152,11 +170,13 @@ export default function CreateEmployee() {
                 </p>
               )}
             </fieldset>
+
             <fieldset className="address">
               <legend>Address</legend>
 
               <label htmlFor="street">Street</label>
               <input
+                data-testid="input-street"
                 id="street"
                 name="street"
                 type="text"
@@ -167,6 +187,7 @@ export default function CreateEmployee() {
 
               <label htmlFor="city">City</label>
               <input
+                data-testid="input-city"
                 id="city"
                 name="city"
                 type="text"
@@ -175,25 +196,31 @@ export default function CreateEmployee() {
                 required
               />
 
-              <label>State</label>
-              <Select
-                menuPortalTarget={document.body}
-                classNamePrefix="rs"
-                styles={{
-                  control: (base) => ({
-                    ...base,
-                    backgroundColor: "#f6f6f6",
-                  }),
-                  menuPortal: (base) => ({ ...base, zIndex: 9999 }),
-                }}
-                options={STATES}
-                value={form.state}
-                onChange={(o) => setSelect("state", o)}
-                placeholder="Select state..."
-              />
+              <label htmlFor="state">State</label>
+              <div data-testid="select-state">
+                <Select
+                  inputId="state"
+                  aria-label="State"
+                  menuPortalTarget={document.body}
+                  menuPosition="fixed"
+                  classNamePrefix="rs"
+                  styles={{
+                    control: (base) => ({
+                      ...base,
+                      backgroundColor: "#f6f6f6",
+                    }),
+                    menuPortal: (base) => ({ ...base, zIndex: 1 }),
+                  }}
+                  options={STATES}
+                  value={form.state}
+                  onChange={(o) => setSelect("state", o)}
+                  placeholder="Select state..."
+                />
+              </div>
 
               <label htmlFor="zipCode">Zip Code</label>
               <input
+                data-testid="input-zip-code"
                 id="zipCode"
                 name="zipCode"
                 type="text"
@@ -207,22 +234,30 @@ export default function CreateEmployee() {
           <div className="form-bottom">
             <fieldset>
               <legend>Department</legend>
-              <Select
-                classNamePrefix="rs"
-                styles={{
-                  control: (base) => ({
-                    ...base,
-                    backgroundColor: "#f6f6f6",
-                  }),
-                }}
-                options={DEPARTMENTS}
-                value={form.department}
-                onChange={(o) => setSelect("department", o)}
-                placeholder="Select department"
-              />
+              <div data-testid="select-department">
+                <Select
+                  inputId="department"
+                  aria-label="Department"
+                  classNamePrefix="rs"
+                  menuPortalTarget={document.body}
+                  menuPosition="fixed"
+                  styles={{
+                    control: (base) => ({
+                      ...base,
+                      backgroundColor: "#f6f6f6",
+                    }),
+                    menuPortal: (base) => ({ ...base, zIndex: 1 }),
+                  }}
+                  options={DEPARTMENTS}
+                  value={form.department}
+                  onChange={(o) => setSelect("department", o)}
+                  placeholder="Select department"
+                />
+              </div>
             </fieldset>
           </div>
-          <button className="btn" type="submit">
+
+          <button data-testid="btn-submit" className="btn" type="submit">
             Save
           </button>
         </form>

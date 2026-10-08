@@ -10,7 +10,8 @@ export default function Header() {
               <p>Wealth</p>
               <img
                 src="/logoWealthHealth-no_bg_1.png"
-                alt="WealthHealth"
+                alt=""
+                role="presentation"
                 className="header-logo"
               />
               <p>Health</p>
