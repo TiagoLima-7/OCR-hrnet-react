@@ -77,10 +77,15 @@ textarea {
   padding-top: 32px;
 }
 
+.header-logo {
+  width: 80px;
+  height: 80px;
+}
+
 .nav-link {
   background: #5b700f;
   padding: 6px 12px;
-  color: #f3dfcb;
+  color: #fff;
   transition: all 0.15s ease-in-out;
   filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.25));
 }
@@ -120,7 +125,7 @@ textarea {
 }
 
 .container form {
-  color: #5b700f;
+  color: #3d4d08;
 }
 
 .container form legend {
@@ -187,6 +192,7 @@ fieldset {
 /* Le conteneur du dropdown */
 .rs__menu {
   background-color: #f6f6f6 !important;
+  z-index: 9999 !important;
 }
 
 /* Chaque option */
@@ -206,15 +212,19 @@ fieldset {
   color: #fff !important;
 }
 
+#datepicker-portal {
+  z-index: 9999;
+}
+
 .btn {
   display: block;
   margin: 1em auto;
   background: #5b700f;
   padding: 12px 24px;
   color: #f3dfcb;
-  filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.25));
   font-size: 24px;
   transition: all 0.15s ease-in-out;
+  filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.25));
 }
 
 .site-footer {
@@ -253,6 +263,15 @@ fieldset {
   justify-content: space-around;
 }
 
+.modal-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: SPACE-EVENLY;
+  align-items: center;
+}
+
 .modal-icon svg {
   width: 50px;
   height: 50px;
@@ -262,4 +281,88 @@ fieldset {
 
 .datatable-container {
   margin-top: 16px;
+}
+
+.search-container input {
+  border-bottom: 2px solid #5b700f;
+  background: transparent;
+  color: #333;
+}
+
+.search-container input::placeholder {
+  color: #aaa;
+}
+
+.page-size-control select {
+  border-bottom: 2px solid #5b700f;
+  background: transparent;
+  color: #333;
+}
+
+thead {
+  color: #3d4d08;
+  font-size: 16px;
+  border-bottom: 2px solid #5b700f;
+}
+
+.sortable-th:hover {
+  color: #3d4d08;
+}
+
+.sortable-th.active-sort {
+  border-bottom: 2px solid #3d4d08;
+}
+
+.sort-arrow {
+  color: #aaa;
+}
+
+.sortable-th.active-sort .sort-arrow {
+  color: #3d4d08;
+}
+
+tbody tr {
+  border-bottom: 1px solid rgba(91, 112, 15, 0.2);
+}
+
+tbody tr:last-child {
+  border-bottom: none;
+}
+
+tbody tr:hover {
+  background-color: rgba(91, 112, 15, 0.07);
+}
+
+tbody td {
+  color: #333;
+}
+
+.datatable-info {
+  color: #555;
+}
+
+.datatable-pagination button {
+  border: 1px solid #c8d48a;
+  background: #fff;
+  color: #5b700f;
+}
+
+.datatable-pagination button:hover:not(:disabled) {
+  background: #e8f0c0;
+}
+
+.datatable-pagination button:disabled {
+  color: #bbb;
+  border-color: #e0e0e0;
+}
+
+.datatable-pagination button.active-page {
+  background: #5b700f;
+  color: #f3dfcb;
+  border-color: #5b700f;
+  font-weight: 600;
+}
+
+.pagination-ellipsis {
+  color: #888;
 }
