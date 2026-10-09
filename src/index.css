@@ -126,6 +126,12 @@ textarea {
 
 .container form {
   color: #3d4d08;
+  display: flex;
+  flex-direction: column;
+  padding: 0 10%;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .container form legend {
@@ -134,7 +140,9 @@ textarea {
 
 .container .form-top {
   display: flex;
-  gap: 200px;
+  width: 100%;
+  justify-content: space-between;
+  max-width: 666px;
 }
 
 .container .form-bottom {
@@ -144,6 +152,7 @@ textarea {
   justify-content: space-between;
   gap: 200px;
   margin-top: 20px;
+  max-width: 666px;
 }
 
 .container .form-bottom > * {
@@ -365,4 +374,45 @@ tbody td {
 
 .pagination-ellipsis {
   color: #888;
+}
+
+@media (max-width: 1024px) {
+  .form-top {
+    flex-direction: column;
+  }
+
+  .react-datepicker-wrapper {
+    width: 100%;
+  }
+
+  .form-top input {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+  }
+  .logo {
+    font-size: 36px;
+    gap: 25px;
+  }
+
+  .header-logo {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 425px) {
+  .logo {
+    font-size: 24px;
+    gap: 12px;
+  }
+
+  .header-logo {
+    width: 35px;
+    height: 35px;
+  }
 }
