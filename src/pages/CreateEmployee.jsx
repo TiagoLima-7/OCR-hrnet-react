@@ -7,6 +7,11 @@ import "react-datepicker/dist/react-datepicker.css";
 import { addEmployee } from "../store/employeesSlice";
 import { DEPARTMENTS, STATES } from "../features/employees/constants";
 import Modal from "../components/common/Modal";
+import { validateEmployee } from "../features/employees/validateEmployee";
+
+function DatePickerInput({ ref, ...props }) {
+  return <input ref={ref} {...props} />;
+}
 
 const EMPTY = {
   firstName: "",
@@ -36,21 +41,7 @@ export default function CreateEmployee() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const newErrors = {};
-    if (!form.dateOfBirth) {
-      newErrors.dateOfBirth = "Date of birth is required";
-    } else {
-      const today = new Date();
-      const minAge = new Date(
-        today.getFullYear() - 18,
-        today.getMonth(),
-        today.getDate(),
-      );
-      if (form.dateOfBirth > minAge) {
-        newErrors.dateOfBirth = "Employee must be at least 18 years old";
-      }
-      if (!form.startDate) newErrors.startDate = "Start date is required";
-    }
+    const newErrors = validateEmployee(form);
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
@@ -76,6 +67,51 @@ export default function CreateEmployee() {
     setConfirm(false);
     setForm(EMPTY);
     navigate("/employees");
+  }
+
+  const maxDOB = new Date(
+    new Date().getFullYear() - 18,
+    new Date().getMonth(),
+    new Date().getDate(),
+  );
+
+  const MIN_YEAR = 1900;
+
+  const [dobKey, setDobKey] = useState(0);
+
+  function handleDateOfBirthChange(date) {
+    // Pas de date ou année incomplète pendant la frappe (ex: "1", "19", "190")
+    if (!date || date.getFullYear() < 1000) {
+      if (!date) setDate("dateOfBirth", null);
+      return;
+    }
+
+    // Année complète mais invalide (ex: 0200)
+    if (date.getFullYear() < MIN_YEAR) {
+      setErrors((prev) => ({ ...prev, dateOfBirth: "Invalid date" }));
+      setDate("dateOfBirth", null);
+      setDobKey((k) => k + 1);
+      return;
+    }
+
+    // Employé mineur
+    if (date > maxDOB) {
+      setErrors((prev) => ({
+        ...prev,
+        dateOfBirth: "Employee must be at least 18 years old",
+      }));
+      setDate("dateOfBirth", null);
+      setDobKey((k) => k + 1);
+      return;
+    }
+
+    // Date valide ✓
+    setErrors((prev) => {
+      const next = { ...prev };
+      delete next.dateOfBirth;
+      return next;
+    });
+    setDate("dateOfBirth", date);
   }
 
   return (
@@ -114,29 +150,24 @@ export default function CreateEmployee() {
 
               <label htmlFor="dateOfBirth">Date of Birth</label>
               <DatePicker
+                key={dobKey}
+                id="dateOfBirth"
                 customInput={
-                  <input
+                  <DatePickerInput
                     data-testid="input-date-of-birth"
-                    id="dateOfBirth"
                     aria-label="Date of Birth"
                   />
                 }
                 popperProps={{ strategy: "fixed" }}
                 portalId="datepicker-portal"
                 selected={form.dateOfBirth}
-                onChange={(d) => setDate("dateOfBirth", d)}
-                dateFormat={"MM/dd/yyyy"}
+                onChange={handleDateOfBirthChange}
+                dateFormat="MM/dd/yyyy"
                 placeholderText=""
                 showYearDropdown
                 scrollableYearDropdown
                 yearDropdownItemNumber={60}
-                startDate={
-                  new Date(
-                    new Date().getFullYear() - 18,
-                    new Date().getMonth(),
-                    new Date().getDate(),
-                  )
-                }
+                openToDate={new Date(new Date().getFullYear() - 25, 0, 1)}
               />
               {errors.dateOfBirth && (
                 <p style={{ color: "red", fontSize: "12px" }}>
@@ -146,10 +177,10 @@ export default function CreateEmployee() {
 
               <label htmlFor="startDate">Start Date</label>
               <DatePicker
+                id="startDate"
                 customInput={
-                  <input
+                  <DatePickerInput
                     data-testid="input-start-date"
-                    id="startDate"
                     aria-label="Start Date"
                   />
                 }
@@ -157,12 +188,20 @@ export default function CreateEmployee() {
                 portalId="datepicker-portal"
                 selected={form.startDate}
                 onChange={(d) => setDate("startDate", d)}
-                dateFormat={"MM/dd/yyyy"}
+                dateFormat="MM/dd/yyyy"
                 placeholderText=""
                 showYearDropdown
                 scrollableYearDropdown
                 yearDropdownItemNumber={60}
-                minDate={form.dateOfBirth ?? undefined}
+                minDate={
+                  form.dateOfBirth
+                    ? new Date(
+                        form.dateOfBirth.getFullYear() + 18,
+                        form.dateOfBirth.getMonth(),
+                        form.dateOfBirth.getDate(),
+                      )
+                    : undefined
+                }
               />
               {errors.startDate && (
                 <p style={{ color: "red", fontSize: "12px" }}>
