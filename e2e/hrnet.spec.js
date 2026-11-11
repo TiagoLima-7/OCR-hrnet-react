@@ -179,7 +179,9 @@ test.describe("Employee list", () => {
 
   test("no results for an unmatched search", async ({ page }) => {
     await page.getByTestId("input-search").fill("xyz_not_found");
-    await expect(page.locator("text=No entries found")).toBeVisible();
+    await expect(
+      page.getByRole("cell", { name: "No entries found" }),
+    ).toBeVisible();
   });
 
   test("column sort works", async ({ page }) => {
