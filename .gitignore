@@ -29,3 +29,7 @@ dist-ssr
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+
+#Table fill
+/fill_table.js
