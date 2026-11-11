@@ -6,8 +6,8 @@ import { DataTable } from "hrnet-datatable";
 const columns = [
   { key: "firstName", label: "First Name" },
   { key: "lastName", label: "Last Name" },
-  { key: "dateOfBirth", label: "Date Of Birth" },
-  { key: "startDate", label: "Start Date" },
+  { key: "dateOfBirth", label: "Date Of Birth", type: "date" },
+  { key: "startDate", label: "Start Date", type: "date" },
   { key: "street", label: "Street" },
   { key: "city", label: "City" },
   { key: "state", label: "State" },
