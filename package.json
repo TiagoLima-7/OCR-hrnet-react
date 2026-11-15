@@ -1,7 +1,7 @@
 {
   "name": "hrnet-react",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.12.0",
+    "hrnet-datatable-tiago": "^1.0.2",
     "react": "^19.2.8",
     "react-datepicker": "^9.1.0",
     "react-dom": "^19.2.8",

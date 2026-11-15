@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectEmployees } from "../store/employeesSlice";
-import { DataTable } from "hrnet-datatable";
+import { DataTable } from "hrnet-datatable-tiago";
+// import { DataTable } from "@tiagolima-7/hrnet-datatable";
 
 const columns = [
   { key: "firstName", label: "First Name" },
