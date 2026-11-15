@@ -1,6 +1,6 @@
 # HRnet — WealthHealth
 
-Employee management application built with React, replacing the original jQuery version. OpenClassrooms project P12.
+Employee management application built with React, replacing the original jQuery version. OpenClassrooms project P14.
 
 ## Stack
 
@@ -9,7 +9,7 @@ Employee management application built with React, replacing the original jQuery 
 - Redux Toolkit + redux-persist
 - react-datepicker v9
 - react-select v5
-- hrnet-datatable (linked locally via Vite alias)
+- hrnet-datatable-tiago (npmjs.com)
 - Playwright (end-to-end tests)
 
 ## Getting started
@@ -23,22 +23,22 @@ Runs at `http://localhost:5173`.
 
 ## Scripts
 
-| Script | Description |
-|---|---|
-| `npm run dev` | Start the development server |
-| `npm run build` | Production build |
-| `npm run preview` | Preview the production build |
-| `npm run lint` | Lint with ESLint |
-| `npx playwright test` | Run end-to-end tests |
+| Script                     | Description                          |
+| -------------------------- | ------------------------------------ |
+| `npm run dev`              | Start the development server         |
+| `npm run build`            | Production build                     |
+| `npm run preview`          | Preview the production build         |
+| `npm run lint`             | Lint with ESLint                     |
+| `npx playwright test`      | Run end-to-end tests                 |
 | `npx playwright test --ui` | Run E2E tests with the Playwright UI |
 
 ## Routes
 
-| Path | Page |
-|---|---|
-| `/` | Redirects to `/create` |
-| `/create` | Create a new employee |
-| `/employees` | Employee list |
+| Path         | Page                   |
+| ------------ | ---------------------- |
+| `/`          | Redirects to `/create` |
+| `/create`    | Create a new employee  |
+| `/employees` | Employee list          |
 
 Both pages are lazy-loaded with React Suspense.
 
@@ -48,6 +48,7 @@ Both pages are lazy-loaded with React Suspense.
 Form with fields for first name, last name, date of birth, start date, department, and address (street, city, state, zip code). State and department use searchable dropdowns (react-select). Date fields use react-datepicker with manual entry support.
 
 Validation rules:
+
 - Date of birth is required and the employee must be at least 18 years old.
 - Start date is required and must not be before the employee's 18th birthday.
 
@@ -71,11 +72,20 @@ main.jsx
 e2e/
 hrnet.spec.js Playwright tests (navigation, form, validation, list)
 
-
 ## Data persistence
 
 Employee data is stored in `localStorage` under the key `persist:hrnet` via redux-persist. Clearing site data in the browser resets the application to an empty list.
 
-## Local package link
+## Package npm — hrnet-datatable
 
-The `hrnet-datatable` package is not installed from npm — it is resolved locally via a Vite alias pointing to `../hrnet-datatable/src/index.js`. Both projects must live in the same parent directory.
+The `hrnet-datatable` component is installed from npmjs.com:
+
+```bash
+npm install hrnet-datatable-tiago
+```
+
+The CSS must be imported manually in `main.jsx`:
+
+```js
+import "hrnet-datatable-tiago/dist/hrnet-datatable.css";
+```
