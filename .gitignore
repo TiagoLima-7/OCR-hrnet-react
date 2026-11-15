@@ -31,5 +31,8 @@ dist-ssr
 /playwright/.auth/
 
 
-#Table fill
+# Table fill
 /fill_table.js
+
+# NPM
+.npmrc
